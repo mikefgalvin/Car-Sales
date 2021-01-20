@@ -30,27 +30,31 @@ const initialState = {
 export const carSalesReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_CAR_FEATURE:
+            const priceX = state.additionalFeatures.find(item => item.id == action.payload)
             return {
                 ...state,
+                additionalPrice: state.additionalPrice + priceX.price,
                 car: {
                     ...state.car, 
                     features: state.car.features.concat(state.additionalFeatures.filter(x => x.id == action.payload)),
                 },
             }
         case REMOVE_CAR_FEATURE:
+            const priceY = state.additionalFeatures.find(item => item.id == action.payload)
             return {
                 ...state,
+                additionalPrice: state.additionalPrice - priceY.price,
                 car: {
                     ...state.car, 
                     features: state.car.features.filter(x => x.id !== action.payload)
                 }
             }
-        case TOTAL_CAR_PRICE:
-            return {
-                ...state,
-                additionalPrice: state.car.features.reduce((prevValue, currentValue) => prevValue + currentValue.price, 0),
-                features: state.car.features.filter(x => x.id !== action.payload),
-            }
+        // case TOTAL_CAR_PRICE:
+        //     return {
+        //         ...state,
+        //         additionalPrice: state.car.features.reduce((prevValue, currentValue) => prevValue + currentValue.price, 0),
+        //         // features: state.car.features.filter(x => x.id !== action.payload),
+        //     }
         default:
             return state;
     }

@@ -16,7 +16,7 @@ const AdditionalFeature = props => {
 
   const handleClick = () => {
     dispatch(addCarFeature(props.feature.id));
-    dispatch(totalCarPrice(props.feature.price));
+    // dispatch(totalCarPrice(props.feature.price));
   }
 
   
