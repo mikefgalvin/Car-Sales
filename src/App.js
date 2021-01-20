@@ -10,7 +10,7 @@ import { addCarFeature } from './actions/carSalesActions'
 
 const App = (props) => {
 
-  const carState = useSelector( state => state.car)
+  const carState = useSelector( state => state.car )
   
   console.log(props)
   return (

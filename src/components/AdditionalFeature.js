@@ -1,6 +1,6 @@
 import React, { useEffect }from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addCarFeature } from '../actions/carSalesActions'
+import { addCarFeature, totalCarPrice } from '../actions/carSalesActions'
 
 
 const AdditionalFeature = props => {
@@ -15,7 +15,8 @@ const AdditionalFeature = props => {
   const dispatch = useDispatch()
 
   const handleClick = () => {
-    dispatch(addCarFeature(props.feature.id))
+    dispatch(addCarFeature(props.feature.id));
+    dispatch(totalCarPrice(props.feature.price));
   }
 
   

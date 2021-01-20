@@ -1,5 +1,5 @@
 
-import { ADD_CAR_FEATURE, REMOVE_CAR_FEATURE } from '../actions/carSalesActions';
+import { ADD_CAR_FEATURE, REMOVE_CAR_FEATURE, TOTAL_CAR_PRICE } from '../actions/carSalesActions';
 
 
 const initialState = {
@@ -30,24 +30,12 @@ const initialState = {
 export const carSalesReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_CAR_FEATURE:
-            // return {
-            //     ...state, 
-            //     features: state.additionalFeatures.map((additionalFeature) => {
-            //         if (additionalFeature.id == action.payload) {
-            //             console.log('log')
-            //             return {
-            //                 features: state.car.features.push(additionalFeature),
-            //             }
-            //         }
-            //         else return additionalFeature;
-            //     })
-            // }
             return {
                 ...state,
                 car: {
                     ...state.car, 
-                    features: state.car.features.concat(state.additionalFeatures.filter(x => x.id == action.payload))
-                }
+                    features: state.car.features.concat(state.additionalFeatures.filter(x => x.id == action.payload)),
+                },
             }
         case REMOVE_CAR_FEATURE:
             return {
@@ -56,6 +44,12 @@ export const carSalesReducer = (state = initialState, action) => {
                     ...state.car, 
                     features: state.car.features.filter(x => x.id !== action.payload)
                 }
+            }
+        case TOTAL_CAR_PRICE:
+            return {
+                ...state,
+                additionalPrice: state.car.features.reduce((prevValue, currentValue) => prevValue + currentValue.price, 0),
+                features: state.car.features.filter(x => x.id !== action.payload),
             }
         default:
             return state;
